@@ -59,6 +59,7 @@ module Octopus
           value.each do |k, v|
             fail 'You have duplicated shard names!' if @shards.key?(k.to_sym)
 
+            v = resolve_string_connection(v)
             initialize_adapter(v['adapter'])
             config_with_octopus_shard = v.merge(:octopus_shard => k)
 
